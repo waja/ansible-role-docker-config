@@ -1,4 +1,5 @@
 ---
+role_name_check: 1
 dependency:
   name: galaxy
 driver:
@@ -10,9 +11,9 @@ lint: |
 platforms:
   - name: instance
     image: "${MOLECULE_DISTRO:-qwe1/docker-debian:11-molecule}"
-#    tmpfs:
-#      - /run
-#      - /tmp
+    tmpfs:
+      - /run
+      - /tmp
     privileged: true
     pre_build_image: true
     command: ${MOLECULE_DOCKER_COMMAND:-""}

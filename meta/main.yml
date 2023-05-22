@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: waja
+  description: ansible pinning role for docker on Debian
+  company: none
+
+  license: GPLv3
+
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - debian
+    - docker
+
+dependencies: []

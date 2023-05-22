@@ -11,6 +11,7 @@ variables:
 services:
   - docker:dind
 stages:
+  - lint
   - test
 before_script:
   - docker info
@@ -18,7 +19,7 @@ before_script:
   - molecule --version
 
 lint:
-  stage: test
+  stage: lint
   tags:
     - ansible
   image: python:latest
@@ -48,6 +49,8 @@ lint:
 #    - molecule test
 test_d10:
   stage: test
+  dependencies:
+    - lint
   tags:
     - ansible
   variables:

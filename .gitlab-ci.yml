@@ -37,30 +37,17 @@ lint:
     - ansible
   script:
     - molecule test
-#test_d8:
-#  stage: test
-#  tags:
-#    - ansible
-#  variables:
-#    MOLECULE_DISTRO: "geerlingguy/docker-debian8-ansible:testing"
-#  script:
-#    - cd roles/common
-#    - molecule test
-#test_d9:
-#  stage: test
-#  tags:
-#    - ansible
-#  variables:
-#    MOLECULE_DISTRO: "geerlingguy/docker-debian9-ansible:testing"
-#  script:
-#    - cd roles/common
-#    - molecule test
-test_d10:
+ubuntu_2004:
+  variables:
+    MOLECULE_DISTRO: "geerlingguy/docker-ubuntu2004-ansible"
+  extends:
+    - .molecule_test
+debian_10:
   variables:
     MOLECULE_DISTRO: "geerlingguy/docker-debian10-ansible"
   extends:
     - .molecule_test
-test_d11:
+debian_11:
   variables:
     MOLECULE_DISTRO: "qwe1/docker-debian:11-molecule"
   extends:

@@ -17,6 +17,17 @@ before_script:
   - ansible --version
   - molecule --version
 
+lint:
+  stage: test
+  tags:
+    - ansible
+  image: python:latest
+  before_script:
+    - pip3 install yamllint ansible-lint
+  script:
+    - yamllint .
+    - ansible-lint
+
 #test_d8:
 #  stage: test
 #  tags:

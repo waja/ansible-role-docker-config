@@ -1,0 +1,5 @@
+---
+- name: Pin docker packages
+  ansible.builtin.include_tasks: apt_pinning.yml
+  when:
+    - docker_apt_pinned_packages is defined

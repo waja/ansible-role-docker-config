@@ -1,0 +1,4 @@
+---
+docker_apt_pinned_packages:
+  - { package: "docker-ce*", version: "5:23.0*" }
+  - { package: "containerd.io", version: "1.6*" }

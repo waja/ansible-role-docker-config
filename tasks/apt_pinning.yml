@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Add apt pin preferences
-  tansible.builtin.emplate:
+  ansible.builtin.template:
     src: docker_apt_pinned_packages.j2
     dest: /etc/apt/preferences.d/docker_pinning
     mode: '0644'

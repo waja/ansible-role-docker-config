@@ -1,0 +1,16 @@
+---
+
+# We need to be sure the file exists
+
+- name: Check if /etc/apt/apt.conf.d/50unattended-upgrades exists
+  ansible.builtin.stat:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+  register: unattended_upgrades_status
+
+- name: Whitelist Docker archive for unattended upgrades
+  ansible.builtin.lineinfile:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+    insertafter: "origin=Debian,codename=\\${distro_codename},label=Debian-Security"
+    line: '        "origin=Docker,archive=${distro_codename},label=Docker CE";'
+    firstmatch: yes
+  when: unattended_upgrades_status.stat.exists

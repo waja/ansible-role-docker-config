@@ -3,3 +3,6 @@
   ansible.builtin.include_tasks: apt_pinning.yml
   when:
     - docker_apt_pinned_packages is defined
+
+- name: Whitelist Docker archive for unattended upgrades
+  ansible.builtin.include_tasks: unattended_upgrades.yml

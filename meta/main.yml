@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: waja
+  role_name: docker_pinning
   description: ansible pinning role for docker on Debian
   company: none
 

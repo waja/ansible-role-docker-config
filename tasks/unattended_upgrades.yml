@@ -12,5 +12,5 @@
     path: /etc/apt/apt.conf.d/50unattended-upgrades
     insertafter: "origin=Debian,codename=\\${distro_codename},label=Debian-Security"
     line: '        "origin=Docker,archive=${distro_codename},label=Docker CE";'
-    firstmatch: yes
+    firstmatch: true
   when: unattended_upgrades_status.stat.exists

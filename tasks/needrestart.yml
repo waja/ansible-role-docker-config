@@ -1,0 +1,12 @@
+---
+- name: Blacklist container for needrestart
+  ansible.builtin.blockinfile:
+    path: /etc/needrestart/conf.d/blacklist_rc.conf
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: |
+      $nrconf{blacklist_rc} = [
+              qr(containerd.service),
+      ];

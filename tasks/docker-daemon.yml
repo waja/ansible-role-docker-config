@@ -1,0 +1,9 @@
+---
+- name: Enable docker live-restore
+  ansible.builtin.lineinfile:
+    path: /etc/docker/daemon.json
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    line: "{ \"live-restore\": true }"

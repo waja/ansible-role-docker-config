@@ -6,3 +6,26 @@
 
 - name: Whitelist Docker archive for unattended upgrades
   ansible.builtin.include_tasks: unattended_upgrades.yml
+
+- name: Adjust some system configurations
+  ansible.builtin.include_tasks: postfix.yml
+  when:
+    - docker_mynetworks is defined
+
+- name: Enable docker live-restore
+  ansible.builtin.include_tasks: docker-daemon.yml
+
+- name: Adjust grub kernel line
+  ansible.builtin.include_tasks: grub.yml
+  tags:
+    - molecule-idempotence-notest
+
+- name: Check if /etc/needrestart/conf.d/ exists
+  ansible.builtin.stat:
+    path: /etc/needrestart/conf.d/
+  register: dockertools_needrestart_conf_d_status
+
+- name: Configure needrestart
+  ansible.builtin.include_tasks: needrestart.yml
+  when:
+    - dockertools_needrestart_conf_d_status.stat.isdir is defined and dockertools_needrestart_conf_d_status.stat.isdir

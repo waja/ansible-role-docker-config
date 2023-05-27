@@ -3,7 +3,7 @@
   hosts: all
   become: true
   roles:
-    - role: waja.docker_pinning
+    - role: waja.dockerconfig
 
 #  pre_tasks:
 #    - name: Update apt cache.

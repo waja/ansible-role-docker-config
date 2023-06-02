@@ -18,4 +18,5 @@
     src: docker_apt_pinned_packages.j2
     dest: /etc/apt/preferences.d/docker_pinning
     mode: '0644'
-  when: docker_apt_pinned_packages is defined
+  when:
+    - docker_apt_pinned_packages is defined

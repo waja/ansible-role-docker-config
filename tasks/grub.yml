@@ -5,7 +5,8 @@
   register: dockertools_etc_default_grub_status
 
 - name: Adjust grub related configs
-  when: dockertools_etc_default_grub_status.exists is defined and dockertools_etc_default_grub_status.exists
+  when:
+    - dockertools_etc_default_grub_status.exists is defined and dockertools_etc_default_grub_status.exists
   block:
     - name: Check if cgroup memory, swapaccount, legacy systemd cgroup controller and vsyscall emulate in grub kernel line  # noqa: no-changed-when
       ansible.builtin.shell: grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub | grep -c "cgroup_enable=memory swapaccount=1 systemd.legacy_systemd_cgroup_controller=yes vsyscall=emulate"
@@ -14,7 +15,8 @@
 
     - name: Enable cgroup memory, swapaccount, legacy systemd cgroup controller and vsyscall emulate  # noqa: no-free-form
       ansible.builtin.lineinfile: dest="/etc/default/grub" regexp='GRUB_CMDLINE_LINUX_DEFAULT="(.*)"' line='GRUB_CMDLINE_LINUX_DEFAULT="\1 cgroup_enable=memory swapaccount=1 systemd.legacy_systemd_cgroup_controller=yes vsyscall=emulate"' backrefs=yes
-      when: dockertools_grub_default_status.stdout == "0"
+      when:
+        - dockertools_grub_default_status.stdout is defined and dockertools_grub_default_status.stdout == "0"
 
     - name: Check if /boot/grub/grub.cfg exists
       ansible.builtin.stat:
@@ -24,5 +26,5 @@
     - name: Run update-grub  # noqa: no-changed-when
       ansible.builtin.command: update-grub2
       when:
-        - dockertools_grub_default_status.stdout == "0"
+        - dockertools_grub_default_status.stdout is defined and dockertools_grub_default_status.stdout == "0"
         - dockertools_grub_cfg_status.stat.islnk is defined and dockertools_grub_cfg_status.stat.islnk

@@ -13,4 +13,5 @@
     insertafter: "origin=Debian,codename=\\${distro_codename},label=Debian-Security"
     line: '        "origin=Docker,archive=${distro_codename},label=Docker CE";'
     firstmatch: true
-  when: unattended_upgrades_status.stat.exists
+  when:
+    - unattended_upgrades_status.stat.exists is defined and unattended_upgrades_status.stat.exists

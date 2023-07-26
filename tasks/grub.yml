@@ -27,4 +27,4 @@
       ansible.builtin.command: update-grub2
       when:
         - dockertools_grub_default_status.stdout is defined and dockertools_grub_default_status.stdout == "0"
-        - dockertools_grub_cfg_status.stat.islnk is defined and dockertools_grub_cfg_status.stat.islnk
+        - dockertools_grub_cfg_status.stat.exists is defined and dockertools_grub_cfg_status.stat.exists
